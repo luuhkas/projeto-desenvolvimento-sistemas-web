@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore Tailwind - Início</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sand: '#f7f1ea',
+                        cream: '#fdf8f2',
+                        latte: '#f6ede3',
+                        surface: '#ffffff',
+                        surfaceAlt: '#f3e7d9',
+                        textMain: '#2f241d',
+                        muted: '#7a685d',
+                        borderWarm: '#e7d7c8',
+                        accent: '#c96f2d',
+                        accentDark: '#a8581f',
+                        accentSoft: '#f8e2cf'
+                    },
+                    boxShadow: {
+                        warm: '0 14px 36px rgba(91, 53, 29, 0.10)',
+                        warmHover: '0 18px 42px rgba(201, 111, 45, 0.15)'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-cream to-latte text-textMain antialiased">
+    <header class="sticky top-0 z-10 border-b border-borderWarm bg-white/90 backdrop-blur">
+        <div class="mx-auto flex w-[90%] max-w-6xl flex-col gap-4 py-4 md:flex-row md:items-center md:justify-between">
+            <h1 class="text-3xl font-bold tracking-[0.02em] text-accent">TechStore</h1>
+
+            <nav>
+                <ul class="flex flex-wrap items-center justify-center gap-2">
+                    <li><a href="index.html" class="rounded-full bg-accent px-4 py-2 font-semibold text-white transition hover:bg-accentDark">Início</a></li>
+                    <li><a href="produtos.html" class="rounded-full px-4 py-2 font-semibold text-textMain transition hover:bg-accentSoft hover:text-accent">Produtos</a></li>
+                    <li><a href="contato.html" class="rounded-full px-4 py-2 font-semibold text-textMain transition hover:bg-accentSoft hover:text-accent">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-12 md:py-[72px]">
+            <div class="mx-auto grid w-[90%] max-w-6xl items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(360px,520px)]">
+                <div>
+                    <p class="mb-4 inline-flex rounded-full bg-accentSoft px-4 py-2 text-sm font-semibold text-accent">Versão em Tailwind</p>
+                    <h2 class="mb-5 text-4xl font-bold leading-tight md:text-6xl">Os melhores acessórios eletrônicos para seu dia a dia</h2>
+                    <p class="mb-7 max-w-2xl text-lg leading-8 text-muted">Tecnologia, qualidade e praticidade em uma seleção pensada para estudo, trabalho e entretenimento.</p>
+                    <a href="produtos.html" class="inline-flex items-center justify-center rounded-xl bg-accent px-6 py-3 font-bold text-white transition hover:-translate-y-0.5 hover:bg-accentDark">Ver produtos</a>
+                </div>
+
+                <div>
+                    <img src="img/index_hero.jpg" alt="Mesa com notebook e acessórios eletrônicos organizados"
+                        class="h-[320px] w-full rounded-[28px] border border-white/80 object-cover shadow-warm md:h-[360px]">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-14 md:py-16">
+            <div class="mx-auto w-[90%] max-w-6xl">
+                <h2 class="mb-10 text-center text-3xl font-bold md:text-[2rem]">Produtos em destaque</h2>
+
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-5 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <img src="img/fone_bluetooth.jpg" alt="Fone de ouvido bluetooth over-ear em destaque"
+                            class="mb-4 h-48 w-full rounded-2xl object-cover">
+                        <h3 class="mb-2 text-xl font-semibold">Fone Bluetooth</h3>
+                        <p class="mb-4 text-muted">Som de qualidade e bateria duradoura.</p>
+                        <span class="inline-flex rounded-full bg-accentSoft px-3 py-2 font-bold text-accent">R$ 299</span>
+                    </article>
+
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-5 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <img src="img/smartwatch.jpg" alt="Smartwatch preto com tela digital em close"
+                            class="mb-4 h-48 w-full rounded-2xl object-cover">
+                        <h3 class="mb-2 text-xl font-semibold">Smartwatch</h3>
+                        <p class="mb-4 text-muted">Praticidade e tecnologia no seu pulso.</p>
+                        <span class="inline-flex rounded-full bg-accentSoft px-3 py-2 font-bold text-accent">R$ 459</span>
+                    </article>
+
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-5 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <img src="img/teclado_mecanico.jpg" alt="Teclado mecânico com iluminação em close sobre mesa"
+                            class="mb-4 h-48 w-full rounded-2xl object-cover">
+                        <h3 class="mb-2 text-xl font-semibold">Teclado Mecânico</h3>
+                        <p class="mb-4 text-muted">Conforto e desempenho para estudo e trabalho.</p>
+                        <span class="inline-flex rounded-full bg-accentSoft px-3 py-2 font-bold text-accent">R$ 389</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-surfaceAlt py-14 md:py-16">
+            <div class="mx-auto w-[90%] max-w-6xl">
+                <h2 class="mb-10 text-center text-3xl font-bold md:text-[2rem]">Por que escolher nossa loja?</h2>
+
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-6 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <h3 class="mb-3 text-xl font-semibold">Entrega rápida</h3>
+                        <p class="text-muted">Envios ágeis e seguros para você receber sem complicação.</p>
+                    </article>
+
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-6 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <h3 class="mb-3 text-xl font-semibold">Qualidade garantida</h3>
+                        <p class="text-muted">Produtos selecionados com foco em desempenho e durabilidade.</p>
+                    </article>
+
+                    <article class="rounded-3xl border border-borderWarm bg-surface p-6 shadow-warm transition duration-300 hover:-translate-y-1.5 hover:border-[#ddb08a] hover:shadow-warmHover">
+                        <h3 class="mb-3 text-xl font-semibold">Suporte dedicado</h3>
+                        <p class="text-muted">Atendimento rápido para ajudar antes e depois da compra.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-borderWarm bg-white py-6 text-center text-muted">
+        <div class="mx-auto w-[90%] max-w-6xl">
+            <p>© 2026 TechStore. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
