@@ -32,8 +32,9 @@ As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaS
 ├── Tarefa 2/
 │   ├── css/
 │   └── img/
-└── Tarefa 3/
-    └── img/
+├── Tarefa 3/
+│   └── img/
+└── Tarefa 4/
 ```
 
 ## Como visualizar os projetos
@@ -44,6 +45,12 @@ Exemplo no macOS:
 
 ```bash
 open "Tarefa 3/index.html"
+```
+
+Para testar a tarefa 4:
+
+```bash
+open "Tarefa 4/index.html"
 ```
 
 ## Organização do Repositório

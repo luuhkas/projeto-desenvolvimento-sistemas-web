@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefa 4 - Validação com JavaScript</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#fdf8f2',
+                        latte: '#f6ede3',
+                        surface: '#ffffff',
+                        textMain: '#2f241d',
+                        muted: '#7a685d',
+                        borderWarm: '#e7d7c8',
+                        accent: '#c96f2d',
+                        accentSoft: '#f8e2cf'
+                    },
+                    boxShadow: {
+                        warm: '0 14px 36px rgba(91, 53, 29, 0.10)'
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-b from-cream to-latte text-textMain antialiased">
+    <main class="flex min-h-screen items-center justify-center px-4 py-10">
+        <section class="w-full max-w-xl rounded-[28px] border border-borderWarm bg-surface p-7 shadow-warm">
+            <p class="mb-3 inline-flex rounded-full bg-accentSoft px-4 py-2 text-sm font-semibold text-accent">Tarefa 4</p>
+            <h1 class="mb-4 text-3xl font-bold">Validação de nome</h1>
+            <p class="mb-6 text-muted">
+                Digite um nome para receber o feedback em tempo real.
+            </p>
+
+            <div class="flex flex-col gap-3">
+                <label for="nome" class="font-semibold">Nome</label>
+                <input id="nome" type="text" placeholder="Digite seu nome"
+                    class="w-full rounded-xl border border-borderWarm bg-slate-50 px-4 py-3 text-textMain outline-none transition focus:ring-4 focus:ring-[rgba(201,111,45,0.16)]">
+                <p id="mensagem" class="min-h-6 text-sm font-semibold"></p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
