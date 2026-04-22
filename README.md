@@ -4,6 +4,7 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://pt-br.react.dev/)
 [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
@@ -22,7 +23,7 @@ Este repositório funciona como base única para armazenar a evolução das ativ
 
 ## Stack
 
-As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaScript e versionamento com Git/GitHub, conforme a necessidade de cada prática desenvolvida na disciplina.
+As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaScript, React e versionamento com Git/GitHub, conforme a necessidade de cada prática desenvolvida na disciplina.
 
 ## Estrutura
 
@@ -34,12 +35,14 @@ As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaS
 │   └── img/
 ├── Tarefa 3/
 │   └── img/
-└── Tarefa 4/
+├── Tarefa 4/
+└── Tarefa 6/
+    └── src/
 ```
 
 ## Como visualizar os projetos
 
-Como os materiais atuais são estáticos, basta abrir os arquivos HTML no navegador.
+As tarefas estáticas podem ser abertas diretamente no navegador.
 
 Exemplo no macOS:
 
@@ -52,6 +55,16 @@ Para testar a tarefa 4:
 ```bash
 open "Tarefa 4/index.html"
 ```
+
+Para testar a tarefa 6, instale as dependências e rode o servidor React:
+
+```bash
+cd "Tarefa 6"
+npm install
+npm run dev
+```
+
+Depois, abra o endereço exibido no terminal. Normalmente será `http://127.0.0.1:5173/`, mas pode mudar para outra porta se a primeira estiver em uso. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 6/abrir_tarefa_6.command`.
 
 ## Organização do Repositório
 
