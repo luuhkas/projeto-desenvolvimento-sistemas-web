@@ -36,7 +36,13 @@ As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaS
 ├── Tarefa 3/
 │   └── img/
 ├── Tarefa 4/
-└── Tarefa 6/
+├── Tarefa 6/
+│   ├── abrir_tarefa_6.command
+│   ├── package.json
+│   └── src/
+└── Tarefa 7/
+    ├── abrir_tarefa_7.command
+    ├── package.json
     └── src/
 ```
 
@@ -65,6 +71,16 @@ npm run dev
 ```
 
 Depois, abra o endereço exibido no terminal. Normalmente será `http://127.0.0.1:5173/`, mas pode mudar para outra porta se a primeira estiver em uso. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 6/abrir_tarefa_6.command`.
+
+Para testar a tarefa 7, o processo é o mesmo:
+
+```bash
+cd "Tarefa 7"
+npm install
+npm run dev
+```
+
+Depois, abra o endereço exibido no terminal. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 7/abrir_tarefa_7.command`.
 
 ## Organização do Repositório
 
