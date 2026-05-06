@@ -1,0 +1,21 @@
+{
+  "name": "tarefa-8-next-hooks-roteamento",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^16.2.2",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.14"
+  },
+  "overrides": {
+    "postcss": "^8.5.14"
+  }
+}
