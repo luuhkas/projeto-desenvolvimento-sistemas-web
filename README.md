@@ -44,11 +44,17 @@ As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaS
 │   ├── abrir_tarefa_7.command
 │   ├── package.json
 │   └── src/
-└── Tarefa 8/
-    ├── abrir_tarefa_8.command
+├── Tarefa 8/
+│   ├── abrir_tarefa_8.command
+│   ├── package.json
+│   ├── pages/
+│   └── src/
+└── Trabalho/
+    ├── abrir_trabalho.command
     ├── package.json
     ├── pages/
-    └── src/
+    ├── src/
+    └── styles/
 ```
 
 ## Como visualizar os projetos
@@ -96,6 +102,16 @@ npm run dev
 ```
 
 Depois, abra o endereço exibido no terminal. Normalmente será `http://localhost:3000/`. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 8/abrir_tarefa_8.command`.
+
+Para testar o trabalho final, entre na pasta e rode o servidor Next.js:
+
+```bash
+cd "Trabalho"
+npm install
+npm run dev
+```
+
+Depois, abra o endereço exibido no terminal. Normalmente será `http://localhost:3000/`. No macOS, também é possível iniciar o trabalho com dois cliques em `Trabalho/abrir_trabalho.command`.
 
 ## Organização do Repositório
 
