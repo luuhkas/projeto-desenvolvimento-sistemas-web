@@ -1,6 +1,17 @@
 # Trabalho - Sistema de Estoque
 
-Trabalho da disciplina de Projeto e Desenvolvimento de Sistemas Web. Front-end de um sistema de estoque feito em Next.js + React.
+Front-end de um sistema de estoque feito para a disciplina de Projeto e Desenvolvimento
+de Sistemas Web. Reescrito para usar o máximo de bibliotecas e frameworks do ecossistema
+React, conforme o material de apoio da disciplina.
+
+## Stack
+
+- **Next.js 16** (App Router) — roteamento por pastas em `src/app`
+- **Tailwind CSS v4** — estilização por utilitários (sem CSS escrito à mão)
+- **shadcn/ui** — componentes de UI (Button, Card, Input, Table, Select, Form, Badge, Sonner)
+- **React Hook Form + Zod** — todos os formulários com validação por schema
+- **Middleware do Next.js** — controle de acesso / proteção de rotas
+- **js-cookie** — sessão em cookie (para o middleware conseguir lê-la no servidor)
 
 ## Como rodar
 
@@ -13,34 +24,51 @@ Abrir em http://localhost:3000.
 
 ## Login de teste
 
-- email: admin@estoque.com
-- senha: 123456
+- email: `admin@estoque.com`
+- senha: `123456`
 
-Também dá pra criar conta nova na tela de cadastro.
+Também dá pra criar conta nova na tela de cadastro (`/cadastro`).
 
-## O que tem no sistema
+## Estrutura de rotas (13 telas)
 
-Páginas públicas: home, sobre, contato, login e cadastro.
+Públicas: `/` (home), `/sobre`, `/contato`, `/login`, `/cadastro`.
 
-Área privada (precisa estar logado): dashboard, gerenciamento de usuários, convite de usuário, e o módulo de estoque com visualização, baixas, cadastros, métricas e relatórios.
+Privadas (exigem login): `/admin` (dashboard), `/admin/usuarios`, `/admin/convidar` e o
+módulo de estoque `/admin/estoque` com `baixas`, `cadastros`, `metricas` e `relatorios`.
 
-São 13 rotas de tela no total.
+## Como o controle de acesso funciona
 
-## Como o login funciona
+O arquivo `src/middleware.js` roda no servidor antes de cada rota do `matcher`:
 
-Não tem back-end. Os usuários ficam salvos no localStorage do navegador, junto com a sessão de quem está logado. Quando o usuário tenta acessar uma rota privada sem estar logado, o componente `RotaPrivada` percebe e redireciona pro /login.
+1. Acesso a `/admin/*` **sem** sessão → redireciona para `/login?redirect=<rota>`.
+2. Acesso a `/login` ou `/cadastro` **com** sessão → redireciona para `/admin`.
 
-Tudo isso está centralizado no `AuthContext` (src/context/AuthContext.js), que tem as funções de login, cadastro e logout. Cada página privada é envolvida pelo `RotaPrivada` (src/components/RotaPrivada.js).
+A sessão fica em um **cookie** (`estoque_sessao`) justamente para que o middleware
+consiga lê-la no servidor. O `AuthProvider` (`src/context/auth-context.jsx`) cuida de
+login, cadastro e logout no client, gravando/limpando esse cookie.
 
-## Stack
+## Organização do código
 
-- Next.js 16 (Pages Router)
-- React 19 (hooks: useState, useEffect, useContext)
-- CSS puro (styles/globals.css)
-
-Sem libs externas além do Next/React.
+```
+src/
+  app/                 # rotas (App Router)
+    admin/             # área privada (protegida pelo middleware)
+  components/
+    navbar.jsx
+    ui/                # componentes do shadcn/ui
+  context/auth-context.jsx
+  lib/
+    auth.js            # sessão (cookie) + usuários (localStorage)
+    validations.js     # schemas Zod de todos os formulários
+    utils.js           # helper cn() do shadcn
+  data/estoque.js      # dados mockados
+  middleware.js        # proteção de rotas
+```
 
 ## Observações
 
-- A senha fica em texto puro no localStorage só porque é trabalho de front-end. Em um sistema real teria back-end com hash.
-- Os dados de estoque são mockados em src/data/estoque.js.
+- Não há back-end: a lista de usuários fica no `localStorage` e a senha não é criptografada
+  (é trabalho de front-end). Em produção isso ficaria em uma API com hash.
+- Os dados de estoque são mockados em `src/data/estoque.js`.
+- O Next 16 emite um aviso sugerindo renomear `middleware` para `proxy`; o nome
+  `middleware` foi mantido por ser o termo pedido no enunciado e ainda ser suportado.
