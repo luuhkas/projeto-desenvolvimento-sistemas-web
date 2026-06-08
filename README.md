@@ -5,6 +5,8 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://pt-br.react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Fastify](https://img.shields.io/badge/Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white)](https://fastify.dev/)
 [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
@@ -23,7 +25,7 @@ Este repositório funciona como base única para armazenar a evolução das ativ
 
 ## Stack
 
-As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaScript, React e versionamento com Git/GitHub, conforme a necessidade de cada prática desenvolvida na disciplina.
+As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaScript, React, Next.js, Node.js, Fastify e versionamento com Git/GitHub, conforme a necessidade de cada prática desenvolvida na disciplina.
 
 ## Estrutura
 
@@ -48,6 +50,10 @@ As atividades deste repositório podem envolver HTML5, CSS3, Tailwind CSS, JavaS
 │   ├── abrir_tarefa_8.command
 │   ├── package.json
 │   ├── pages/
+│   └── src/
+├── Tarefa 9/
+│   ├── abrir_tarefa_9.command
+│   ├── package.json
 │   └── src/
 └── Trabalho/
     ├── abrir_trabalho.command
@@ -102,6 +108,16 @@ npm run dev
 ```
 
 Depois, abra o endereço exibido no terminal. Normalmente será `http://localhost:3000/`. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 8/abrir_tarefa_8.command`.
+
+A tarefa 9 esta reservada para a API de filmes com Node.js e Fastify:
+
+```bash
+cd "Tarefa 9"
+npm install
+npm start
+```
+
+Depois, teste pela interface Swagger em `http://127.0.0.1:3000/docs` ou acesse diretamente `http://127.0.0.1:3000/`, `http://127.0.0.1:3000/filmes`, `http://127.0.0.1:3000/busca?q=totoro` e `http://127.0.0.1:3000/filmes/:id`. No macOS, também é possível iniciar a tarefa com dois cliques em `Tarefa 9/abrir_tarefa_9.command`.
 
 Para testar o trabalho final, entre na pasta e rode o servidor Next.js:
 

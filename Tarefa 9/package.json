@@ -1,0 +1,26 @@
+{
+  "name": "tarefa-9-api-filmes-fastify",
+  "version": "1.0.0",
+  "description": "API de filmes com Node.js e Fastify para a Tarefa 9.",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch-path=src src/server.js",
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "fastify",
+    "api",
+    "filmes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/autoload": "^6.3.1",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/sensible": "^6.0.3",
+    "@fastify/swagger": "^9.7.0",
+    "@fastify/swagger-ui": "^5.2.6",
+    "fastify": "^5.6.2"
+  }
+}
