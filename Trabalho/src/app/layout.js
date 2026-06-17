@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 import { AuthProvider } from "@/context/auth-context";
+import { EstoqueProvider } from "@/context/estoque-context";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR" className="dark">
       <body className={`${inter.className} antialiased`}>
         <AuthProvider>
-          <Navbar />
-          {children}
-          <Toaster richColors position="top-right" />
+          <EstoqueProvider>
+            <Navbar />
+            {children}
+            <Toaster richColors position="top-right" />
+          </EstoqueProvider>
         </AuthProvider>
       </body>
     </html>

@@ -12,6 +12,9 @@ React, conforme o material de apoio da disciplina.
 - **React Hook Form + Zod** — todos os formulários com validação por schema
 - **Middleware do Next.js** — controle de acesso / proteção de rotas
 - **js-cookie** — sessão em cookie (para o middleware conseguir lê-la no servidor)
+- **Context API** — estado compartilhado de autenticação (`AuthContext`) e de estoque (`EstoqueContext`)
+- **prop-types** — validação de props dos componentes próprios
+- **Jest + React Testing Library** — testes automatizados (`npm test`)
 
 ## Como rodar
 
@@ -21,6 +24,12 @@ npm run dev
 ```
 
 Abrir em http://localhost:3000.
+
+Para rodar os testes:
+
+```
+npm test
+```
 
 ## Login de teste
 
@@ -56,12 +65,17 @@ src/
   components/
     navbar.jsx
     ui/                # componentes do shadcn/ui
-  context/auth-context.jsx
+  context/
+    auth-context.jsx   # sessão/usuário (Context API)
+    estoque-context.jsx# produtos e baixas compartilhados (Context API)
+  hooks/
+    useMetricasEstoque.js # cálculos das métricas (lógica reaproveitada)
   lib/
     auth.js            # sessão (cookie) + usuários (localStorage)
     validations.js     # schemas Zod de todos os formulários
+    validations.test.js# testes dos schemas
     utils.js           # helper cn() do shadcn
-  data/estoque.js      # dados mockados
+  data/estoque.js      # dados mockados (semente do EstoqueContext)
   middleware.js        # proteção de rotas
 ```
 
@@ -69,6 +83,9 @@ src/
 
 - Não há back-end: a lista de usuários fica no `localStorage` e a senha não é criptografada
   (é trabalho de front-end). Em produção isso ficaria em uma API com hash.
-- Os dados de estoque são mockados em `src/data/estoque.js`.
+- Os dados de estoque são mockados em `src/data/estoque.js` e servem de semente para o
+  `EstoqueContext`. A partir dele, registrar uma baixa **desconta** do estoque e todas as
+  telas (visualização, cadastros, métricas, relatórios e dashboard) leem a mesma fonte,
+  ficando coerentes entre si.
 - O Next 16 emite um aviso sugerindo renomear `middleware` para `proxy`; o nome
   `middleware` foi mantido por ser o termo pedido no enunciado e ainda ser suportado.

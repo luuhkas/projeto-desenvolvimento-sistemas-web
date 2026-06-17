@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import PropTypes from "prop-types";
 
 import { cn } from "@/lib/utils";
 
@@ -46,3 +47,7 @@ export default function EstoqueLayout({ children }) {
     </main>
   );
 }
+
+EstoqueLayout.propTypes = {
+  children: PropTypes.node,
+};

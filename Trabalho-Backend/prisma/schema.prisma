@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Usuários do sistema (login/cadastro)
+model Usuario {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String   @unique
+  senha    String
+  criadoEm DateTime @default(now())
+}
+
+// Produtos do catálogo de estoque
+model Produto {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  categoria  String
+  quantidade Int      @default(0)
+  minimo     Int      @default(0)
+  criadoEm   DateTime @default(now())
+  baixas     Baixa[]
+}
+
+// Baixas (saídas de estoque) — cada baixa pertence a um produto
+model Baixa {
+  id          Int      @id @default(autoincrement())
+  quantidade  Int
+  responsavel String
+  data        DateTime @default(now())
+  produtoId   Int
+  produto     Produto  @relation(fields: [produtoId], references: [id])
+}

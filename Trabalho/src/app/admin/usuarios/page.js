@@ -18,10 +18,13 @@ export default function UsuariosPage() {
   const { listarUsuarios } = useAuth();
   const [usuarios, setUsuarios] = useState([]);
 
-  // a lista vem do localStorage, entao so dá pra ler no client (useEffect)
+  // a lista vem da API (rota privada); busca uma vez ao montar
   useEffect(() => {
-    setUsuarios(listarUsuarios());
-  }, [listarUsuarios]);
+    listarUsuarios()
+      .then(setUsuarios)
+      .catch(() => setUsuarios([]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="mx-auto w-[min(1120px,92vw)] py-12">

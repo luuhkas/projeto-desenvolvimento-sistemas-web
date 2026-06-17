@@ -1,0 +1,11 @@
+node_modules
+
+# Variáveis de ambiente (segredos) fora do controle de versão
+.env
+
+# Banco de dados SQLite local (recriado por `prisma migrate`)
+prisma/dev.db
+prisma/*.db-journal
+
+# Lixo do macOS
+.DS_Store

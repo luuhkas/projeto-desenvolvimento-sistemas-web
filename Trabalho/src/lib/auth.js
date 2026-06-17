@@ -1,36 +1,21 @@
 import Cookies from "js-cookie";
 
-// nome do cookie de sessao — o middleware tambem usa esse mesmo nome
-export const CHAVE_SESSAO = "estoque_sessao";
-// lista de usuarios cadastrados fica no localStorage (front-end sem back-end)
-const CHAVE_USUARIOS = "estoque_usuarios";
+// cookies da sessão. O middleware lê o TOKEN para proteger as rotas /admin;
+// o USUARIO guarda nome/email só para exibição no front.
+export const CHAVE_TOKEN = "estoque_token";
+export const CHAVE_USUARIO = "estoque_usuario";
 
-// conta de teste pra nao precisar cadastrar do zero
-const usuarioPadrao = {
-  nome: "Administrador",
-  email: "admin@estoque.com",
-  senha: "123456",
-};
+const opcoes = { expires: 1, sameSite: "lax", path: "/" };
 
-export function lerUsuarios() {
-  if (typeof window === "undefined") return [usuarioPadrao];
-  const dados = window.localStorage.getItem(CHAVE_USUARIOS);
-  if (!dados) {
-    // primeira vez: ja deixa o admin padrao salvo
-    window.localStorage.setItem(CHAVE_USUARIOS, JSON.stringify([usuarioPadrao]));
-    return [usuarioPadrao];
-  }
-  return JSON.parse(dados);
+// guarda o token JWT e os dados do usuário após o login
+export function salvarSessao(token, usuario) {
+  Cookies.set(CHAVE_TOKEN, token, opcoes);
+  Cookies.set(CHAVE_USUARIO, JSON.stringify(usuario), opcoes);
 }
 
-export function salvarUsuarios(usuarios) {
-  window.localStorage.setItem(CHAVE_USUARIOS, JSON.stringify(usuarios));
-}
-
-// a sessao vai num cookie (e nao no localStorage) justamente pra que o
-// middleware do Next consiga le-la no servidor e proteger as rotas /admin
-export function lerSessao() {
-  const bruto = Cookies.get(CHAVE_SESSAO);
+// lê o usuário salvo no cookie (para restaurar a sessão ao recarregar a página)
+export function lerUsuario() {
+  const bruto = Cookies.get(CHAVE_USUARIO);
   if (!bruto) return null;
   try {
     return JSON.parse(bruto);
@@ -39,14 +24,7 @@ export function lerSessao() {
   }
 }
 
-export function salvarSessao(usuario) {
-  Cookies.set(CHAVE_SESSAO, JSON.stringify(usuario), {
-    expires: 1,
-    sameSite: "lax",
-    path: "/",
-  });
-}
-
 export function limparSessao() {
-  Cookies.remove(CHAVE_SESSAO, { path: "/" });
+  Cookies.remove(CHAVE_TOKEN, { path: "/" });
+  Cookies.remove(CHAVE_USUARIO, { path: "/" });
 }

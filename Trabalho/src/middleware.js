@@ -1,16 +1,18 @@
 import { NextResponse } from "next/server";
-import { CHAVE_SESSAO } from "@/lib/auth";
 
-// Controle de acesso via middleware do proprio Next.js:
-// roda no servidor antes de cada rota listada no matcher e decide
-// se deixa passar, bloqueia ou redireciona.
+// nome do cookie do token (definido inline para o middleware não importar
+// a lib js-cookie, que é só de navegador)
+const CHAVE_TOKEN = "estoque_token";
+
+// Controle de acesso via middleware do próprio Next.js:
+// roda no servidor antes de cada rota do matcher e decide se passa ou redireciona.
 export function middleware(request) {
   const { pathname } = request.nextUrl;
-  const sessao = request.cookies.get(CHAVE_SESSAO);
-  const estaLogado = Boolean(sessao?.value);
+  const token = request.cookies.get(CHAVE_TOKEN);
+  const estaLogado = Boolean(token?.value);
   const rotaPrivada = pathname.startsWith("/admin");
 
-  // 1) usuario nao autenticado tentando acessar area restrita -> manda pro login
+  // 1) sem token tentando acessar área restrita -> manda pro login
   if (rotaPrivada && !estaLogado) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
@@ -18,7 +20,7 @@ export function middleware(request) {
     return NextResponse.redirect(url);
   }
 
-  // 2) usuario ja logado nao precisa ver login/cadastro -> manda pro painel
+  // 2) já logado não precisa ver login/cadastro -> manda pro painel
   if (estaLogado && (pathname === "/login" || pathname === "/cadastro")) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";

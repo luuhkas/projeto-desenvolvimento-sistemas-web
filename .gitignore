@@ -2,3 +2,8 @@
 node_modules/
 dist/
 .next/
+
+# variáveis de ambiente locais (nunca vão para o repositório)
+.env
+.env.local
+.env*.local

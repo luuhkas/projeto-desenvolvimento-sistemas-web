@@ -1,4 +1,6 @@
-import { produtosMock, baixasMock } from "@/data/estoque";
+"use client";
+
+import { useMetricasEstoque } from "@/hooks/useMetricasEstoque";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -9,16 +11,14 @@ import {
 } from "@/components/ui/card";
 
 export default function MetricasPage() {
-  const totalItens = produtosMock.reduce((acc, p) => acc + p.quantidade, 0);
-  const abaixoMinimo = produtosMock.filter((p) => p.quantidade < p.minimo).length;
-  const totalBaixas = baixasMock.reduce((acc, b) => acc + b.quantidade, 0);
-  const categorias = new Set(produtosMock.map((p) => p.categoria)).size;
+  const { totalItens, abaixoMinimo, totalBaixasQtd, categorias } =
+    useMetricasEstoque();
 
   const cards = [
     { rotulo: "Itens em estoque", valor: totalItens, texto: "unidades disponíveis no total." },
     { rotulo: "Categorias", valor: categorias, texto: "categorias distintas cadastradas." },
     { rotulo: "Abaixo do mínimo", valor: abaixoMinimo, texto: "produtos precisando reposição." },
-    { rotulo: "Baixas registradas", valor: totalBaixas, texto: "unidades retiradas recentemente." },
+    { rotulo: "Baixas registradas", valor: totalBaixasQtd, texto: "unidades retiradas recentemente." },
   ];
 
   return (

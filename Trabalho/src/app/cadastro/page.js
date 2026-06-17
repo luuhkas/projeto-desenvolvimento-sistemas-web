@@ -37,14 +37,14 @@ export default function CadastroPage() {
     defaultValues: { nome: "", email: "", senha: "", confirmarSenha: "" },
   });
 
-  function aoEnviar(valores) {
-    const resultado = cadastrar(valores.nome, valores.email, valores.senha);
+  async function aoEnviar(valores) {
+    const resultado = await cadastrar(valores.nome, valores.email, valores.senha);
     if (!resultado.ok) {
       form.setError("email", { message: resultado.erro });
       return;
     }
     // ja loga automatico depois de cadastrar
-    login(valores.email, valores.senha);
+    await login(valores.email, valores.senha);
     toast.success("Conta criada com sucesso!");
     router.push("/admin");
   }

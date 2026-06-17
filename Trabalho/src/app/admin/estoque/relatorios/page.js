@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { produtosMock, baixasMock } from "@/data/estoque";
+import { useEstoque } from "@/context/estoque-context";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/table";
 
 export default function RelatoriosPage() {
+  const { produtos, baixas } = useEstoque();
   const [tipo, setTipo] = useState("estoque");
   const ehEstoque = tipo === "estoque";
 
@@ -57,7 +58,7 @@ export default function RelatoriosPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {produtosMock.map((p) => (
+              {produtos.map((p) => (
                 <TableRow key={p.id}>
                   <TableCell className="font-medium">{p.nome}</TableCell>
                   <TableCell>{p.categoria}</TableCell>
@@ -77,10 +78,10 @@ export default function RelatoriosPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {baixasMock.map((b) => (
+              {baixas.map((b) => (
                 <TableRow key={b.id}>
-                  <TableCell>{b.data}</TableCell>
-                  <TableCell className="font-medium">{b.produto}</TableCell>
+                  <TableCell>{b.data?.slice(0, 10)}</TableCell>
+                  <TableCell className="font-medium">{b.produto?.nome}</TableCell>
                   <TableCell>{b.quantidade}</TableCell>
                   <TableCell className="text-muted-foreground">{b.responsavel}</TableCell>
                 </TableRow>

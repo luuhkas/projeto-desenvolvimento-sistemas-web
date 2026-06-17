@@ -1,4 +1,6 @@
-import { produtosMock } from "@/data/estoque";
+"use client";
+
+import { useEstoque } from "@/context/estoque-context";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -11,6 +13,8 @@ import {
 } from "@/components/ui/table";
 
 export default function VisualizacaoPage() {
+  const { produtos } = useEstoque();
+
   return (
     <Card>
       <CardContent>
@@ -33,7 +37,7 @@ export default function VisualizacaoPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {produtosMock.map((p) => (
+            {produtos.map((p) => (
               <TableRow key={p.id}>
                 <TableCell className="font-medium">{p.nome}</TableCell>
                 <TableCell>{p.categoria}</TableCell>

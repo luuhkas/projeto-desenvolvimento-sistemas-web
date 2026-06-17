@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { baixaSchema } from "@/lib/validations";
-import { baixasMock, produtosMock } from "@/data/estoque";
+import { useEstoque } from "@/context/estoque-context";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -36,23 +35,25 @@ import {
 } from "@/components/ui/table";
 
 export default function BaixasPage() {
-  const [baixas, setBaixas] = useState(baixasMock);
+  const { produtos, baixas, registrarBaixa } = useEstoque();
 
   const form = useForm({
     resolver: zodResolver(baixaSchema),
-    defaultValues: { produto: produtosMock[0].nome, quantidade: 1 },
+    defaultValues: { produto: "", quantidade: 1 },
   });
 
-  function aoRegistrar(valores) {
-    const nova = {
-      id: Date.now(),
-      data: new Date().toISOString().slice(0, 10),
-      produto: valores.produto,
+  async function aoRegistrar(valores) {
+    const resultado = await registrarBaixa({
+      produtoId: Number(valores.produto),
       quantidade: valores.quantidade,
-      responsavel: "Usuário logado",
-    };
-    setBaixas((atual) => [nova, ...atual]);
-    form.reset({ produto: produtosMock[0].nome, quantidade: 1 });
+    });
+
+    if (!resultado.ok) {
+      toast.error(resultado.erro);
+      return;
+    }
+
+    form.reset({ produto: "", quantidade: 1 });
     toast.success("Baixa registrada!");
   }
 
@@ -85,8 +86,8 @@ export default function BaixasPage() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {produtosMock.map((p) => (
-                        <SelectItem key={p.id} value={p.nome}>
+                      {produtos.map((p) => (
+                        <SelectItem key={p.id} value={String(p.id)}>
                           {p.nome}
                         </SelectItem>
                       ))}
@@ -127,8 +128,8 @@ export default function BaixasPage() {
           <TableBody>
             {baixas.map((b) => (
               <TableRow key={b.id}>
-                <TableCell>{b.data}</TableCell>
-                <TableCell className="font-medium">{b.produto}</TableCell>
+                <TableCell>{b.data?.slice(0, 10)}</TableCell>
+                <TableCell className="font-medium">{b.produto?.nome}</TableCell>
                 <TableCell>{b.quantidade}</TableCell>
                 <TableCell className="text-muted-foreground">{b.responsavel}</TableCell>
               </TableRow>

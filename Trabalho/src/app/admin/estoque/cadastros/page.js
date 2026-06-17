@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { produtoSchema } from "@/lib/validations";
-import { produtosMock } from "@/data/estoque";
+import { useEstoque } from "@/context/estoque-context";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,16 +28,19 @@ import {
 } from "@/components/ui/table";
 
 export default function CadastrosPage() {
-  const [produtos, setProdutos] = useState(produtosMock);
+  const { produtos, adicionarProduto } = useEstoque();
 
   const form = useForm({
     resolver: zodResolver(produtoSchema),
     defaultValues: { nome: "", categoria: "", quantidade: 0, minimo: 0 },
   });
 
-  function aoCadastrar(valores) {
-    const novo = { id: Date.now(), ...valores };
-    setProdutos((atual) => [...atual, novo]);
+  async function aoCadastrar(valores) {
+    const resultado = await adicionarProduto(valores);
+    if (!resultado.ok) {
+      toast.error(resultado.erro);
+      return;
+    }
     form.reset({ nome: "", categoria: "", quantidade: 0, minimo: 0 });
     toast.success("Produto cadastrado!");
   }

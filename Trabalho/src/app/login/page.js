@@ -37,8 +37,8 @@ export default function LoginPage() {
     defaultValues: { email: "", senha: "" },
   });
 
-  function aoEnviar(valores) {
-    const resultado = login(valores.email, valores.senha);
+  async function aoEnviar(valores) {
+    const resultado = await login(valores.email, valores.senha);
     if (!resultado.ok) {
       form.setError("senha", { message: resultado.erro });
       return;

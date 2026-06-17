@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Boxes, PackagePlus, Users } from "lucide-react";
 
 import { useAuth } from "@/context/auth-context";
-import { produtosMock, baixasMock } from "@/data/estoque";
+import { useMetricasEstoque } from "@/hooks/useMetricasEstoque";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,15 +17,14 @@ import { Badge } from "@/components/ui/badge";
 
 export default function DashboardPage() {
   const { usuario } = useAuth();
-
-  const totalItens = produtosMock.reduce((acc, p) => acc + p.quantidade, 0);
-  const abaixoMinimo = produtosMock.filter((p) => p.quantidade < p.minimo).length;
+  const { totalProdutos, totalItens, abaixoMinimo, totalBaixasCount } =
+    useMetricasEstoque();
 
   const cards = [
-    { rotulo: "Produtos", valor: produtosMock.length, texto: "itens cadastrados no catálogo." },
+    { rotulo: "Produtos", valor: totalProdutos, texto: "itens cadastrados no catálogo." },
     { rotulo: "Estoque total", valor: totalItens, texto: "unidades disponíveis somadas." },
     { rotulo: "Alertas", valor: abaixoMinimo, texto: "produtos abaixo do estoque mínimo." },
-    { rotulo: "Baixas", valor: baixasMock.length, texto: "baixas registradas recentemente." },
+    { rotulo: "Baixas", valor: totalBaixasCount, texto: "baixas registradas recentemente." },
   ];
 
   return (
