@@ -25,6 +25,15 @@ export default async function produtosRoutes(app) {
       tags: ['produtos'],
       summary: 'Cria um produto (requer login)',
       security: [{ bearerAuth: [] }],
+      body: {
+        type: 'object',
+        properties: {
+          nome: { type: 'string' },
+          categoria: { type: 'string' },
+          quantidade: { type: 'integer' },
+          minimo: { type: 'integer' },
+        },
+      },
     },
   }, async (request, reply) => {
     const dados = criarProdutoSchema.parse(request.body);
@@ -39,6 +48,15 @@ export default async function produtosRoutes(app) {
       tags: ['produtos'],
       summary: 'Atualiza um produto (requer login)',
       security: [{ bearerAuth: [] }],
+      body: {
+        type: 'object',
+        properties: {
+          nome: { type: 'string' },
+          categoria: { type: 'string' },
+          quantidade: { type: 'integer' },
+          minimo: { type: 'integer' },
+        },
+      },
     },
   }, async (request) => {
     const dados = atualizarProdutoSchema.parse(request.body);

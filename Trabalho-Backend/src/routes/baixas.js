@@ -14,6 +14,13 @@ export default async function baixasRoutes(app) {
       tags: ['baixas'],
       summary: 'Registra uma baixa e desconta do estoque (requer login)',
       security: [{ bearerAuth: [] }],
+      body: {
+        type: 'object',
+        properties: {
+          produtoId: { type: 'integer' },
+          quantidade: { type: 'integer' },
+        },
+      },
     },
   }, async (request, reply) => {
     const dados = criarBaixaSchema.parse(request.body);
