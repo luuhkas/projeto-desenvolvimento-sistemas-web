@@ -23,10 +23,10 @@ export function EstoqueProvider({ children }) {
   const carregar = useCallback(async () => {
     try {
       const [listaProdutos, listaBaixas] = await Promise.all([
-        api("/produtos"),
+        api("/produtos?limite=100"),
         api("/baixas"),
       ]);
-      setProdutos(listaProdutos ?? []);
+      setProdutos(listaProdutos?.dados ?? []);
       setBaixas(listaBaixas ?? []);
     } catch {
       // se a API estiver fora, mantém as listas vazias

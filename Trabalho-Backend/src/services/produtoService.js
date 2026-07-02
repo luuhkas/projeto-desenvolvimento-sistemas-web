@@ -1,5 +1,24 @@
-export async function listarProdutos(prisma) {
-  return prisma.produto.findMany({ orderBy: { id: 'asc' } });
+export async function listarProdutos(prisma, opcoes = {}) {
+  const { pagina = 1, limite = 10, q, categoria,
+          ordenarPor = 'nome', ordem = 'asc' } = opcoes;
+
+  // monta o filtro dinamicamente: só inclui o que veio
+  const where = {};
+  if (q)         where.nome = { contains: q };   // LIKE (case-insensitive no SQLite)
+  if (categoria) where.categoria = categoria;
+
+  // busca a página + conta o total, na mesma transação
+  const [dados, total] = await prisma.$transaction([
+    prisma.produto.findMany({
+      where,
+      orderBy: { [ordenarPor]: ordem },
+      skip: (pagina - 1) * limite,
+      take: limite,
+    }),
+    prisma.produto.count({ where }),
+  ]);
+
+  return { dados, total, pagina, limite, paginas: Math.ceil(total / limite) };
 }
 
 export async function buscarProduto(prisma, id) {

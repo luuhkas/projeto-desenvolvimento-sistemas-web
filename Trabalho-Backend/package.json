@@ -6,23 +6,30 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
     "@fastify/autoload": "^6.3.1",
     "@fastify/cors": "^11.2.0",
     "@fastify/jwt": "^10.1.0",
+    "@fastify/rate-limit": "^11.1.0",
     "@fastify/sensible": "^6.0.4",
     "@fastify/swagger": "^9.7.0",
     "@fastify/swagger-ui": "^6.0.0",
     "@prisma/client": "^6.19.3",
     "bcrypt": "^6.0.0",
+    "deep-email-validator": "^0.1.27",
     "dotenv": "^17.4.2",
     "fastify": "^5.8.5",
+    "node-cron": "^4.5.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {

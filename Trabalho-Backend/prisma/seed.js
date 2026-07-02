@@ -9,8 +9,8 @@ async function main() {
   const senhaHash = await bcrypt.hash('123456', 10);
   await prisma.usuario.upsert({
     where: { email: 'admin@estoque.com' },
-    update: {},
-    create: { nome: 'Administrador', email: 'admin@estoque.com', senha: senhaHash },
+    update: { papel: 'SUPER_ADMIN' },
+    create: { nome: 'Super Admin', email: 'admin@estoque.com', senha: senhaHash, papel: 'SUPER_ADMIN' },
   });
 
   // 2) Produtos de exemplo — só cria se a tabela estiver vazia.
@@ -26,6 +26,9 @@ async function main() {
       ],
     });
   }
+
+  // 3) Configuração padrão da rotina de balanço diário (linha única)
+  await prisma.rotinaConfig.upsert({ where: { id: 1 }, update: {}, create: { id: 1 } });
 
   console.log('✓ Seed concluído: admin + produtos de exemplo.');
 }

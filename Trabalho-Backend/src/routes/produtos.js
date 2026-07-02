@@ -1,4 +1,4 @@
-import { criarProdutoSchema, atualizarProdutoSchema } from '../schemas/produto.js';
+import { criarProdutoSchema, atualizarProdutoSchema, listarProdutosQuerySchema } from '../schemas/produto.js';
 import {
   listarProdutos,
   buscarProduto,
@@ -8,19 +8,22 @@ import {
 } from '../services/produtoService.js';
 
 export default async function produtosRoutes(app) {
-  // LISTAR (público)
+  // LISTAR (público) — paginado, com filtro e ordenação
   app.get('/produtos', {
-    schema: { tags: ['produtos'], summary: 'Lista os produtos' },
-  }, async () => listarProdutos(app.prisma));
+    schema: { tags: ['produtos'], summary: 'Lista produtos (paginado, com filtro e ordenação)' },
+  }, async (request) => {
+    const opcoes = listarProdutosQuerySchema.parse(request.query);
+    return listarProdutos(app.prisma, opcoes);
+  });
 
   // DETALHAR (público)
   app.get('/produtos/:id', {
     schema: { tags: ['produtos'], summary: 'Detalha um produto' },
   }, async (request) => buscarProduto(app.prisma, Number(request.params.id)));
 
-  // CRIAR (privado)
+  // CRIAR (Admin / Super Admin)
   app.post('/produtos', {
-    preHandler: [app.authenticate],
+    preHandler: [app.autorizar('produto:criar')],
     schema: {
       tags: ['produtos'],
       summary: 'Cria um produto (requer login)',
@@ -41,9 +44,9 @@ export default async function produtosRoutes(app) {
     return reply.status(201).send(produto);
   });
 
-  // ATUALIZAR (privado)
+  // ATUALIZAR (Admin / Super Admin)
   app.put('/produtos/:id', {
-    preHandler: [app.authenticate],
+    preHandler: [app.autorizar('produto:editar')],
     schema: {
       tags: ['produtos'],
       summary: 'Atualiza um produto (requer login)',
@@ -63,9 +66,9 @@ export default async function produtosRoutes(app) {
     return atualizarProduto(app.prisma, Number(request.params.id), dados);
   });
 
-  // REMOVER (privado)
+  // REMOVER (só Super Admin)
   app.delete('/produtos/:id', {
-    preHandler: [app.authenticate],
+    preHandler: [app.autorizar('produto:remover')],
     schema: {
       tags: ['produtos'],
       summary: 'Remove um produto (requer login)',

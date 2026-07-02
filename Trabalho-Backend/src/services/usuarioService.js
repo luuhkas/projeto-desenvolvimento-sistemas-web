@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
 // cria um usuário com a senha criptografada (hash)
-export async function criarUsuario(prisma, { nome, email, senha }) {
+export async function criarUsuario(prisma, { nome, email, senha, papel = 'OPERADOR' }) {
     const existe = await prisma.usuario.findUnique({ where: { email } });
     if (existe) {
         const erro = new Error('Já existe um usuário com este e-mail.');
@@ -10,16 +10,16 @@ export async function criarUsuario(prisma, { nome, email, senha }) {
     }
     const senhaHash = await bcrypt.hash(senha, 10);
     const usuario = await prisma.usuario.create({
-        data: { nome, email, senha: senhaHash },
+        data: { nome, email, senha: senhaHash, papel },
     });
-    return { id: usuario.id, nome: usuario.nome, email: usuario.email };
+    return { id: usuario.id, nome: usuario.nome, email: usuario.email, papel: usuario.papel };
 }
 
 // lista os usuários cadastrados (sem expor a senha)
 export async function listarUsuarios(prisma) {
     return prisma.usuario.findMany({
         orderBy: { id: 'asc' },
-        select: { id: true, nome: true, email: true, criadoEm: true },
+        select: { id: true, nome: true, email: true, papel: true, criadoEm: true },
     });
 }
 
@@ -31,5 +31,5 @@ export async function autenticar(prisma, { email, senha }) {
         erro.statusCode = 401;
         throw erro;
     }
-    return { id: usuario.id, nome: usuario.nome, email: usuario.email };
+    return { id: usuario.id, nome: usuario.nome, email: usuario.email, papel: usuario.papel };
 }

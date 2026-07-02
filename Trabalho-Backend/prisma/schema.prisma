@@ -16,6 +16,7 @@ model Usuario {
   nome     String
   email    String   @unique
   senha    String
+  papel    String   @default("OPERADOR")   // SUPER_ADMIN | ADMIN | OPERADOR
   criadoEm DateTime @default(now())
 }
 
@@ -38,4 +39,24 @@ model Baixa {
   data        DateTime @default(now())
   produtoId   Int
   produto     Produto  @relation(fields: [produtoId], references: [id])
+}
+
+// Convites para novos usuários (criados por um Admin/Super Admin)
+model Convite {
+  id        Int       @id @default(autoincrement())
+  email     String
+  token     String    @unique
+  papel     String    @default("OPERADOR")
+  expiraEm  DateTime
+  usadoEm   DateTime?          // nulo = ainda não usado
+  criadoPor String              // e-mail de quem convidou
+  criadoEm  DateTime  @default(now())
+}
+
+// configuração da rotina de balanço diário (linha única, id = 1)
+model RotinaConfig {
+  id           Int      @id
+  cron         String   @default("0 18 * * *") // balanço às 18h
+  ativo        Boolean  @default(true)
+  atualizadoEm DateTime @updatedAt
 }

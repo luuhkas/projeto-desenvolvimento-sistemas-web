@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
 import { convidarSchema } from "@/lib/validations";
+import { api } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,11 +31,19 @@ export default function ConvidarPage() {
     defaultValues: { email: "" },
   });
 
-  function aoEnviar(valores) {
-    toast.success("Convite enviado com sucesso!", {
-      description: `Um convite foi enviado para ${valores.email}.`,
-    });
-    form.reset();
+  async function aoEnviar(valores) {
+    try {
+      const resp = await api("/convites", {
+        method: "POST",
+        body: JSON.stringify({ email: valores.email }),
+      });
+      toast.success("Convite enviado!", {
+        description: `E-mail enviado para ${resp.email}.`,
+      });
+      form.reset();
+    } catch (erro) {
+      form.setError("email", { message: erro.message });
+    }
   }
 
   return (

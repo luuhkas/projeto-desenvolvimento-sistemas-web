@@ -1,0 +1,19 @@
+{
+  "name": "trabalho-email",
+  "version": "1.0.0",
+  "description": "Microservico de e-mail do Sistema de Estoque",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.8.5",
+    "nodemailer": "^6.9.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.19.3"
+  }
+}

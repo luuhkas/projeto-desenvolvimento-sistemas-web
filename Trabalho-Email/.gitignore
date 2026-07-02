@@ -1,0 +1,6 @@
+node_modules/
+.env
+prisma/emails.db
+prisma/emails.db-journal
+prisma/*.db-journal
+.DS_Store

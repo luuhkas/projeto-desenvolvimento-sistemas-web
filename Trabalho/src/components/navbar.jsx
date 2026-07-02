@@ -54,10 +54,22 @@ export function Navbar() {
             </Button>
           )}
 
+          {["ADMIN", "SUPER_ADMIN"].includes(usuario?.papel) && (
+            <Button asChild size="sm" variant={estaAtivo("/admin/convidar") ? "default" : "ghost"}>
+              <Link href="/admin/convidar">Convidar</Link>
+            </Button>
+          )}
+
+          {usuario?.papel === "SUPER_ADMIN" && (
+            <Button asChild size="sm" variant={estaAtivo("/admin/backoffice") ? "default" : "ghost"}>
+              <Link href="/admin/backoffice">Backoffice</Link>
+            </Button>
+          )}
+
           {usuario ? (
             <Button size="sm" variant="outline" onClick={aoSair}>
               <LogOut />
-              Sair ({usuario.nome.split(" ")[0]})
+              Sair ({usuario.nome.split(" ")[0]} · {usuario.papel})
             </Button>
           ) : (
             <Button asChild size="sm" variant={estaAtivo("/login") ? "default" : "secondary"}>

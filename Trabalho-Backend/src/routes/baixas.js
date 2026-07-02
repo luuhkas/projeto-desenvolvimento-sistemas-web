@@ -7,9 +7,9 @@ export default async function baixasRoutes(app) {
     schema: { tags: ['baixas'], summary: 'Lista as baixas registradas' },
   }, async () => listarBaixas(app.prisma));
 
-  // REGISTRAR (privado) — desconta do estoque
+  // REGISTRAR (logado; operador só em horário comercial) — desconta do estoque
   app.post('/baixas', {
-    preHandler: [app.authenticate],
+    preHandler: [app.autorizar('baixa:criar')],
     schema: {
       tags: ['baixas'],
       summary: 'Registra uma baixa e desconta do estoque (requer login)',
