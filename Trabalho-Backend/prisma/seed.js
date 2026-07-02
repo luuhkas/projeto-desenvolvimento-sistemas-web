@@ -8,9 +8,9 @@ async function main() {
   //    se já existe, não faz nada; se não, cria. Nunca duplica.
   const senhaHash = await bcrypt.hash('123456', 10);
   await prisma.usuario.upsert({
-    where: { email: 'admin@estoque.com' },
+    where: { email: 'npc.estudos@gmail.com' },
     update: { papel: 'SUPER_ADMIN' },
-    create: { nome: 'Super Admin', email: 'admin@estoque.com', senha: senhaHash, papel: 'SUPER_ADMIN' },
+    create: { nome: 'Super Admin', email: 'npc.estudos@gmail.com', senha: senhaHash, papel: 'SUPER_ADMIN' },
   });
 
   // 2) Produtos de exemplo — só cria se a tabela estiver vazia.

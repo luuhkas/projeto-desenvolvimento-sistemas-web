@@ -42,7 +42,7 @@ npm test
 
 ## Login de teste
 Depois de rodar o `seed` da API:
-- **admin@estoque.com** / **123456** — papel **Super Admin**
+- **npc.estudos@gmail.com** / **123456** — papel **Super Admin**
 
 ## Telas
 Públicas: `/` (home), `/sobre`, `/contato`, `/login`, `/cadastro`.

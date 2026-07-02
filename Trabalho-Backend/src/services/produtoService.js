@@ -42,5 +42,16 @@ export async function atualizarProduto(prisma, id, dados) {
 
 export async function removerProduto(prisma, id) {
   await buscarProduto(prisma, id); // 404 se não existir
+
+  // não deixa apagar produto com histórico de baixas: esses dados alimentam a
+  // inteligência de estoque (consumo, mais movimentados, previsão de ruptura),
+  // então bloqueia com um 409 claro em vez de estourar erro de integridade.
+  const baixas = await prisma.baixa.count({ where: { produtoId: id } });
+  if (baixas > 0) {
+    const erro = new Error('Não é possível excluir um produto com baixas registradas.');
+    erro.statusCode = 409;
+    throw erro;
+  }
+
   await prisma.produto.delete({ where: { id } });
 }

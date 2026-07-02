@@ -59,7 +59,7 @@ npm run dev                 # abre http://localhost:3000
 ## Credenciais de teste
 Depois de rodar `npm run seed`:
 
-- **admin@estoque.com** / **123456** — papel **Super Admin**
+- **npc.estudos@gmail.com** / **123456** — papel **Super Admin**
 
 ## Controle de acesso (ABAC)
 Três papéis: **Super Admin > Admin > Operador**. As decisões não olham só o papel —

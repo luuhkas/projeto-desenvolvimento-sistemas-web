@@ -104,7 +104,7 @@ export default function LoginPage() {
             </Link>
           </p>
           <p>
-            Acesso de teste: <strong>admin@estoque.com</strong> / <strong>123456</strong>
+            Acesso de teste: <strong>npc.estudos@gmail.com</strong> / <strong>123456</strong>
           </p>
         </CardFooter>
       </Card>

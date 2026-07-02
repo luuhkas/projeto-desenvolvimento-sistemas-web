@@ -17,7 +17,12 @@ const __dirname = path.dirname(__filename);
 export async function buildApp() {
     const app = Fastify({ logger: true });
 
-    await app.register(cors, { origin: 'http://localhost:3000' });
+    // o default do @fastify/cors v11 só libera GET,HEAD,POST — precisamos de
+    // PUT/PATCH/DELETE pro CRUD de produtos e pra edição de rotina no backoffice
+    await app.register(cors, {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    });
     await app.register(sensible);
 
     // limita tentativas por rota (ativa só onde a rota pedir via config.rateLimit)
